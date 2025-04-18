@@ -4,9 +4,6 @@ workflows:
     max_build_duration: 120  # 最大构建时长（分钟）
     environment:
       flutter: stable
-      android:
-        api_level: 30  # 指定 Android API 级别
-      jdk: 11  # 使用 JDK 11 进行构建
     scripts:
       - name: Install dependencies
         script: |
@@ -16,5 +13,9 @@ workflows:
       - name: Build Release APK
         script: |
           ./gradlew assembleRelease --stacktrace --info
+    android:
+      api_level: 30  # 指定 Android API 级别
+    java:
+      version: 11  # 使用 JDK 11 进行构建
     artifacts:
       - app/build/outputs/apk/release/app-release.apk  # 确保路径正确
