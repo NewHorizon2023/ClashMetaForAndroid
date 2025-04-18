@@ -3,17 +3,14 @@ workflows:
     name: Android Release Build
     max_build_duration: 120  # 最大构建时长（分钟）
     environment:
-      flutter: stable  # 使用 Flutter 的稳定版
+      flutter: stable  # 使用 Flutter 的稳定版（如果是 Flutter 项目）
     scripts:
-      - name: Install dependencies  # 安装项目依赖的步骤
+      - name: Install dependencies
         script: |
-          git submodule update --init --recursive  # 更新子模块（如果有）
-          ./gradlew clean  # 清理项目，以确保构建干净
-      - name: Build Release APK  # 构建发布版本 APK 的步骤
+          git submodule update --init --recursive
+          ./gradlew clean
+      - name: Build Release APK
         script: |
-          ./gradlew assembleRelease  # 使用 Gradle 构建 release 版本的 APK
+          ./gradlew assembleRelease
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk  # 指定构建的 APK 文件路径
-    publish:
-      html:
-        - build/app/outputs/flutter-apk/app-release.apk  # 生成的 APK 文件路径，用于展示和下载
+      - build/app/outputs/flutter-apk/app-release.apk  # 指定生成的 APK 文件路径
