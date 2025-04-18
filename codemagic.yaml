@@ -13,7 +13,5 @@ workflows:
       - name: Build Release APK
         script: |
           ./gradlew assembleRelease --stacktrace --info
-    android:
-      api_level: 30  # 使用 API Level 30 (例如：Android 11)
     artifacts:
       - app/build/outputs/apk/release/app-release.apk  # 保存构建的 APK
