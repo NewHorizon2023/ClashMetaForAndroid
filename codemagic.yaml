@@ -1,0 +1,20 @@
+workflows:
+  android_release:
+    name: Android Release Build
+    max_build_duration: 120  # 最大构建时长（分钟）
+    environment:
+      android:
+        api_level: 30  # 指定 Android API 级别，30 是 Android 11 的 API 级别
+    scripts:
+      - name: Install dependencies  # 安装项目依赖的步骤
+        script: |
+          git submodule update --init --recursive  # 更新子模块（如果有）
+          ./gradlew clean  # 清理项目，以确保构建干净
+      - name: Build Release APK  # 构建发布版本 APK 的步骤
+        script: |
+          ./gradlew assembleRelease  # 使用 Gradle 构建 release 版本的 APK
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk  # 指定构建的 APK 文件路径
+    publish:
+      html:
+        - build/app/outputs/flutter-apk/app-release.apk  # 生成的 APK 文件路径，用于展示和下载
